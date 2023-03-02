@@ -1,47 +1,41 @@
 // Add imports above this line
 import { galleryItems } from "./gallery-items";
 // Change code below this line
+// Opisany w dokumentacji
+import SimpleLightbox from "simplelightbox";
+// Dodatkowy import stylów
+import "simplelightbox/dist/simple-lightbox.min.css";
+import "../css/common.css";
+import "../css/01-gallery.css";
 
 console.log(galleryItems);
 const qs = (selector) => document.querySelector(selector);
 const galleryElements = qs(".gallery");
 
-const creatingItems = (item) => {
+const itemsMarkup = (item) => {
 	return galleryItems
 		.map(({ preview, original, description }) => {
-			return `<div class="gallery__item">
-      <a class="gallery__link" href="${original.value}">
+			return `<ul class="gallery">
+      <li>
+      <a class="gallery__item" href="${original}">
         <img
           class="gallery__image"
-          src="${preview}"
-          data-photo="${original}"
+          src="${preview}"          
           alt="${description}"
         />
       </a>
-    </div>`;
+      </li>
+     
+    </ul>`;
 		})
 		.join("");
 };
-console.log(galleryItems);
-const imagesMarkup = creatingItems(galleryItems);
+
+const imagesMarkup = itemsMarkup(galleryItems);
 galleryElements.insertAdjacentHTML("beforeend", imagesMarkup);
 
-const onClick = (event) => {
-	event.preventDefault();
-
-	if (event.target.classList.contains("gallery")) return;
-	const source = event.target.dataset.photo;
-	const instance = basicLightbox.create(
-		`<img src="${source}" width="900" height="500">`,
-	);
-
-	instance.show();
-
-	galleryElements.addEventListener("keydown", (event) => {
-		if (event.key === "Escape") {
-			instance.close();
-		}
-	});
-};
-
-galleryElements.addEventListener("click", onClick);
+const lightbox = new SimpleLightbox(".gallery a", {
+	captionsData: "alt",
+	captionDelay: 250,
+	captionType: "alt",
+});
