@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "This project was created with Parcel. For familiarization and setting additional features [refer to documentation](https://parceljs.org/).",
   "homepage": "https://Julia-Kaim.github.io/goit-js-hw-08",
-   "main": "index.js",
+  "main": "index.js",
   "scripts": {
     "start": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url /goit-js-hw-08/"
@@ -31,6 +31,5 @@
     "parcel-reporter-clean-dist": "^1.0.4",
     "posthtml-include": "^1.7.4"
   },
-  "browserslist": "> 0.5%, last 2 versions, not dead",
- 
+  "browserslist": "> 0.5%, last 2 versions, not dead"
 }
